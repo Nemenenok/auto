@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+// Кнопки
+.button {
+	border: 0;
+	position: relative;
+	display: -moz-inline-stack;
+	display: inline-block;
+	margin: 0;
+	font-size: 16px;
+	line-height: 50px;
+	height: 50px;
+	padding: 0 25px;
+	text-align: center;
+	outline: none;
+	white-space: nowrap;
+	color: #FFF;
+	background: $red;
+	text-transform: uppercase;
+	cursor: pointer;
+	@include border-radius();
+
+	&:focus,
+	&:hover {
+		opacity: .8;
+	}
+
+	&:active {
+		opacity: .6;
+	}
+
+	&:visited {
+		color: #FFF;
+	}
+
+	&.button-null {
+		background: transparent;
+		color: lighten($maincolor, 20%);
+		@include box-shadow(0, 0, 0 2px, $blue, inset);
+
+		&:focus,
+		&:hover {
+			opacity: .7;
+		}
+		&:active {
+			opacity: .6;
+		}
+
+		&:visited {
+			color: lighten($maincolor, 20%);
+		}
+	}
+
+	&.info {
+		cursor: default;
+		opacity: 1 !important;
+	}
+
+	&.disabled {
+		background: transparent;
+		color: $gray9;
+		@include box-shadow(0, 0, 0 2px, $gray, inset);
+		cursor: default;
+		opacity: 0.7 !important;
+	}
+}
+
+// Поле ввода
+.input {
+	display: block;
+	margin-bottom: 15px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: $maincolor;
+	border: 0;
+	padding: 0 15px;
+	@include box-sizing();
+	@include border-radius();
+	@include box-shadow(0,0,0 1px, lighten($maincolor,50%));
+	
+	&:last-child {
+		margin: 0;
+	}
+
+	&::-webkit-input-placeholder { color: $maincolor; opacity: .5; @include transition(opacity, .3s); }
+	&::-moz-placeholder { color: $maincolor; opacity: .5; @include transition(opacity, .3s); }
+	&:-moz-placeholder { color: $maincolor; opacity: .5; @include transition(opacity, .3s); }
+	&:-ms-input-placeholder { color: $maincolor; opacity: .5; @include transition(opacity, .3s); }
+
+	&:hover {
+		@include box-shadow(0,0,0 1px,lighten($maincolor,25%));
+
+		&::-webkit-input-placeholder { opacity: 1; }
+		&::-moz-placeholder { opacity: 1; }
+		&:-moz-placeholder { opacity: 1; }
+		&:-ms-input-placeholder { opacity: 1; }
+	}
+	&:focus {
+		outline-style: none;
+		@include box-shadow(0,0,0 1px,$maincolor);
+
+		&::-webkit-input-placeholder { opacity: 0; }
+		&::-moz-placeholder { opacity: 0; }
+		&:-moz-placeholder { opacity: 0; }
+		&:-ms-input-placeholder { opacity: 0; }
+	}
+
+	&.error {
+		color: $red;
+		background: $red;
+		@include box-shadow(0,0,0 1px,$red);
+
+		&::-webkit-input-placeholder { color: $red; }
+		&::-moz-placeholder { color: $red; }
+		&:-moz-placeholder { color: $red; }
+		&:-ms-input-placeholder { color: $red; }
+
+		&:hover { @include box-shadow(0,0,0 1px,lighten($red,15%)); }
+		&:focus { @include box-shadow(0,0,0 1px,$red); }
+	}
+
+	&.submit {
+		background: $red;
+		color: #FFF;
+		text-transform: uppercase;
+		
+		&:hover {
+			box-shadow: none;
+			background: lighten($red,5%);
+		}
+		&:active {
+			background: lighten($red,10%);
+		}
+	}
+}
+
+// Всплывающие окна
+.popup {
+	display: none;
+	z-index: 10000;
+	position: fixed;
+	background: #FFF;
+	padding: 50px;
+	width: 500px;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -200px;
+	@include box-sizing();
+	@include box-shadow(0,0,1px 2px,rgba(0,0,0,.1));
+	
+	&.rent {
+		margin-top: -265px;
+		
+		.info {
+			@include font-size(16, 24);
+			text-transform: uppercase;
+			margin-bottom: 30px;
+			padding-left: 80px;
+			
+			> span {
+				display: inline-block;
+				margin-left: -80px;
+				width: 80px;
+				color: $red;
+			}
+
+			a {
+				span {
+					line-height: 20px;
+					display: inline-block;
+					border-bottom: 1px solid rgba(0,0,0,.3);
+				}
+
+				&:hover span { border-bottom: 1px solid rgba(0,0,0,.5); }
+				&:active span { border-bottom: 1px solid rgba(0,0,0,.7); }
+			}
+		}
+	}
+
+	.caption {
+		@include font-size(30, 36);
+		margin-bottom: 22px;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	.input:not(.submit) {
+		background: $light;
+	}
+
+	.close {
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		top: 0;
+		right: 0;
+		cursor: pointer;
+		opacity: 0.5;
+		
+		&:before,
+		&:after {
+			content: ' ';
+			width: 50%;
+			height: 1px;
+			position: absolute;
+			background: #000;
+			top: 25px;
+			right: 15px;
+			transition: all .3s;
+			-webkit-transform: rotate(135deg);
+			-ms-transform: rotate(135deg);
+			transform: rotate(135deg)
+		}
+
+		&:after {
+			-webkit-transform: rotate(225deg);
+			-ms-transform: rotate(225deg);
+			transform: rotate(225deg)
+		}
+
+
+
+		&:hover {
+			opacity: 1;
+		}
+		&:hover:before,
+		&:hover:after {
+		}
+	}
+
+	&.success {
+		margin-top: -91px;
+		
+		.info, form { display: none; }
+		.center {
+			@include font-size(16, 24);
+			text-align: center;
+		}
+	}
+}
+
+// Галерея
+.fotorama {
+	.fotorama__nav-wrap {
+		position: absolute;
+		bottom: 0;
+		
+		.fotorama__nav--dots {
+			bottom: 15px;
+			
+			.fotorama__nav__frame {
+				width: 20px;
+				height: 20px;
+
+				.fotorama__dot {
+					left: 50%;
+					top: 50%;
+					margin-left: -5px;
+					margin-top: -5px;
+					width: 10px;
+					height: 10px;
+					@include border-radius(10);
+					border: none;
+					background: #fff;
+				}
+
+				&.fotorama__active .fotorama__dot {
+					background: red;
+				}
+			}
+		}
+	}
+
+	.fotorama__arr{
+		height: 500px;
+		width: 100px;
+		opacity: 0.7;
+		top: 0;
+		left: 50%;
+		margin-left: -570px;
+		display: inline-block;
+		vertical-align: middle;
+		cursor: pointer;
+		backface-visibility: hidden;
+
+		&:before,
+		&:after {
+			content: "";
+			display: block;
+			position: absolute;
+			border-radius: 100px;
+			background: #fff;
+			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+			transition: all 100ms ease-in-out;
+			width: 70px;
+			height: 1px;
+			top: 50%;
+			left: 0;
+		}
+
+		&:before {
+			transform: rotate(-75deg);
+		}
+
+		&:after {
+			transform: rotate(75deg);
+			box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.2);
+		}
+
+		&.fotorama__arr--prev {
+
+			&:before,
+			&:after {
+				transform-origin: 0% 50%;
+			}
+		}
+
+		&.fotorama__arr--next {
+			left: auto;
+			right: 50%;
+			margin-right: -570px;
+			
+			&:before,
+			&:after {
+				transform-origin: 100% 50%;
+			}
+		}
+
+		&.fotorama__arr--disabled {
+			opacity: 0.2;
+		}
+
+		&:hover {
+			opacity: 1;
+			
+			&:before { transform: rotate(-70deg); }
+			&:after { transform: rotate(70deg); }
+		}
+
+		&:active {
+			&:before { transform: rotate(-65deg); }
+			&:after { transform: rotate(65deg); }
+		}
+	}
+}

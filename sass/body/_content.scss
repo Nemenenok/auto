@@ -1,0 +1,456 @@
+@charset "UTF-8";
+
+// Основной контейнер
+#content {
+	position: relative;
+	z-index: 110;
+
+	// Общие
+	.inner {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	.caption {
+		@include font-size(16, 24);
+		margin-bottom: 10px;
+		text-transform: uppercase;
+	
+		a {
+			display: inline-block;
+			border-bottom: 1px solid rgba(0,0,0,.3);
+			
+			&:hover { border-bottom: 1px solid rgba(0,0,0,.5); }
+			&:active { border-bottom: 1px solid rgba(0,0,0,.7); }
+		}
+	}
+
+	.date {
+		@include font-size(16, 20);
+		display: inline-block;
+		margin-right: 20px;
+		opacity: 0.5;
+	}
+
+	.cars {
+		margin: 30px 0;
+		
+		.item {
+			float: left;
+			display: block;
+			width: 25%;
+			text-align: center;
+			margin-bottom: 20px;
+			@include font-size(16, 20);
+			
+			.container {
+				display: block;
+				padding: 20px;
+				min-height: 200px;
+				@include box-sizing();
+				@include border-radius(10);
+				border: 1px solid $light;
+				margin: 0 10px;
+				transition: all .3s;
+					
+				.image {
+					display: block;
+					width: 100%;
+					height: 100px;
+					opacity: 0.4;
+					background-position: center;
+					background-repeat: no-repeat;
+					@include background-size();
+					transition: all .3s;
+				}
+
+				.name {
+					display: block;
+					margin-top: 15px;
+				}
+			}
+			
+			&:hover {
+				color: red;
+				
+				.image { opacity: 0.7; }
+				.container { border: 1px solid rgba(0,0,0,.3); }
+			}
+		}
+	}
+	
+	.car {
+		.image {
+			width: 100%;
+			min-height: 400px;
+			background-position: center;
+			background-repeat: no-repeat;
+			@include border-radius(10);
+			@include background-size();
+			margin: 30px 0 20px;
+			opacity: 0.3;
+		}
+	}
+
+	.leftCol {
+		float: left;
+		width: 25%;
+		
+		.filter {
+			margin-top: 30px;
+			margin-right: 30px;
+			padding-bottom: 30px;
+		}
+	}
+
+	.rightCol {
+		float: right;
+		width: 75%;
+		
+		.cars {
+			.item {
+				width: 33%;
+			}
+		}
+	}
+
+	// Текстовый блок
+	.textblock {
+		color: $maincolor;
+		margin-top: $object-line-height + 4 + px;
+		@include font-size($object-font-size, $object-line-height);
+
+		p {
+			color: $maincolor;
+			@include font-size($object-font-size, $object-line-height);
+			margin: 0 0 $object-line-height + px !important;
+
+			span, div {
+				font-size: inherit !important;
+				line-height: inherit !important;
+			}
+
+			pre {
+				float: left;
+				clear: both;
+				margin: 0 30px $object-line-height + px 0 !important;
+				font-size: 13px !important;
+				line-height: 16px !important;
+				width: auto;
+			}
+		}
+
+		blockquote {
+			position: relative;
+			padding: 25px 0;
+			margin: 30px 0;
+			text-transform: uppercase;
+			width: 60%;
+			@include font-size(24, 28);
+			
+			&:before,
+			&:after {
+				content: " ";
+				position: absolute;
+				top: 0;
+				width: 2000px;
+				height: 100%;
+				background: $light5;
+				right: 50%;
+			}
+			&:after {
+				right: auto;
+				left: 50%;
+			}
+		}
+
+		pre {
+			color: #666 !important;
+			margin: -11px 0 $object-line-height + px !important;
+			font-size: 13px !important;
+			line-height: 16px !important;
+			white-space: normal;
+			width: 100%;
+		}
+
+		strong, b { font-weight: 700; }
+		em { font-style: italic; }
+		u { text-decoration: underline;	}
+		s { text-decoration: line-through; }
+
+		a {
+			color: $red;
+
+			&.hover,
+			&:hover,
+			&:focus {
+				outline: none;
+				text-decoration: underline;
+			}
+
+			&:active {
+				opacity: .8;
+			}
+		}
+
+		ol, ul {
+			padding: 0;
+			margin: $object-line-height + px 0;
+			list-style:none;
+
+			li {
+				position:relative;
+				margin: 0 0 10px 20px;
+				color: $maincolor;
+				@include font-size($object-font-size, $object-line-height);
+
+				strong, b {
+					font-weight: 700;
+				}
+
+				p {
+					font-size: $object-font-size;
+				}
+
+				&:before {
+					content: " ";
+					position: absolute;
+					top: 9px;
+					left: -20px;
+					width: 5px;
+					height: 5px;
+					border-radius: 5px;
+					background: #000;
+				}
+			}
+		}
+
+		ol {
+			counter-reset: li;
+
+			li:before {
+				background: none;
+				content: counter(li);
+				counter-increment: li;
+				top: 8px;
+				left: -2em;
+				width: 1em;
+				color: red;
+				text-align: right;
+				@include font-size(10, 10);
+			}
+		}
+
+		table {
+			margin: $object-line-height + px 0;
+			width: 100% !important;
+			@include font-size($object-font-size, $object-line-height);
+			border: 0;
+
+			td {
+				padding: 3px 15px;
+				border: 1px solid $blue10;
+			}
+
+			p {
+				width: auto !important;
+				margin: 0 !important;
+			}
+		}
+
+		img {
+			max-width: 100%;
+			position: relative;
+		}
+
+		h3 {
+			margin: $object-line-height + px 0;
+			@include font-size($object-font-size, $object-line-height);
+		}
+
+		h4 {
+			margin: $object-line-height + px 0;
+			@include font-size($object-font-size, $object-line-height);
+			font-weight: 700;
+			color: #333;
+		}
+
+		h5 {
+			float: left;
+			width: 220px;
+			margin: 5px $object-line-height + px 5px 0;
+			border: 1px solid $blue10;
+			padding: 10px;
+			@include font-size($object-font-size, $object-line-height);
+		}
+
+		h6 {
+			margin: $object-line-height + px 0 !important;
+			@include font-size($object-font-size, $object-line-height);
+			font-weight: 700;
+			color: #333;
+			padding-left: 40px;
+		}
+
+		h3 a, h4 a, h5 a, h6 a {
+			text-decoration: underline;
+			@include link-state(blue, blue, true, false);
+		}
+	}
+
+	// Хлебные крошки
+	.breadcrumbs {
+		height: 50px;
+		background: $light;
+		@include font-size(16, 50);
+		text-transform: uppercase;
+		
+		ul li {
+			float: left;
+
+			a {
+				position: relative;
+				display: block;
+				padding-right: 25px;
+				
+				&.home {
+					width: 14px;
+					background-repeat: no-repeat;
+					background-position: 0 center;
+					background-size: 13px;
+				}
+
+				&:after {
+					content: " ";
+					position: absolute;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					opacity: 0.7;
+					right: 10px;
+					top: 50%;
+					margin-top: -5px;
+					border-width: 5.5px 0 5.5px 5px;
+					border-color: transparent transparent transparent $maincolor;
+				}
+
+				&:hover { color: $red; }
+			}
+			
+			span {
+				opacity: 0.5;
+			}
+
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+
+	// Пагинация
+	.navi {
+		height: 50px;
+		margin-top: 30px;
+		background: $light;
+		@include font-size(16, 50);
+
+		ul {
+			text-align: center;
+			
+			li {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				vertical-align: top;
+
+				a {
+					position: relative;
+					display: block;
+					width: 50px;
+					height: 50px;
+					text-align: center;
+					
+					&.next:before,
+					&.prev:before {
+						content: " ";
+						position: absolute;
+						width: 0;
+						height: 0;
+						border-style: solid;
+						opacity: 0.7;
+						right: 22px;
+						top: 50%;
+						margin-top: -5px;
+						border-width: 5.5px 0 5.5px 5px;
+						border-color: transparent transparent transparent $maincolor;
+					}
+
+					&.prev:before {
+						border-width: 5.5px 5px 5.5px 0;
+						border-color: transparent $maincolor transparent transparent ;
+					}
+
+					&:hover { background: $light; }
+
+					&.noactive {
+						cursor: default;
+						opacity: 0.5;
+						&:hover { background: none; }
+					}
+				}
+				
+				span {
+					background: $light;
+					display: block;
+					width: 50px;
+					height: 50px;
+				}
+
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	// Карта
+	.map {
+		position: relative;
+		background: $light;
+		height: 420px;
+		margin-bottom: -50px;
+
+		&:before,
+		&:after {
+			content: " ";
+			position: absolute;
+			z-index: 10;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background: $light;
+		}
+		&:after {
+			top: auto;
+			bottom: 0;
+		}
+		
+		#map {
+			width: 100%;
+			height: 420px;
+		}
+		
+		.info {
+			position: absolute;
+			z-index: 10;
+			top: 90px;
+			width: 500px;
+			padding: 50px 20px;
+			background: rgba(255,255,255,.7);
+			left: 50%;
+			@include box-sizing();
+		}
+	}
+}
