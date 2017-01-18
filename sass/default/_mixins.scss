@@ -1,0 +1,105 @@
+
+/* BORDER RADIUS */
+@mixin border-radius($radius: 4) {
+	border-radius: $radius + px;
+}
+
+/* BOX SHADOW */
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+	box-shadow: $top $left $blur $color unquote($inset);
+}
+
+/* TEXT SHADOW */
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+	text-shadow: $x $y $blur $color;
+}
+
+/* USER-SELECT */
+@mixin user-select($what: none) {
+	-webkit-user-select: $what;
+	   -moz-user-select: $what;
+		-ms-user-select: $what;
+			user-select: $what;
+}
+
+/* BACKGROUND-SIZE */
+@mixin background-size($what: contain) {
+	background-size: $what;
+}
+
+/* BOX-SIZING */
+@mixin box-sizing($what: border-box) {
+	box-sizing: $what;
+}
+
+/* TRANSFORM */
+@mixin transform($params) {
+	-webkit-transform: $params;
+	    -ms-transform: $params;
+	        transform: $params;
+}
+
+/* TRANSITION */
+@mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
+	-webkit-transition: $what $length $easing;
+			transition: $what $length $easing;
+}
+
+/* ROTATE */
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+	-webkit-transform: rotate($deg + deg);
+    	-ms-transform: rotate($deg + deg);
+			transform: rotate($deg + deg);
+}
+
+/* FONT SIZE */
+@mixin font-size($size: 1.4, $line: $size * 1.25) {
+	font-size: $size + px;
+	line-height: $line + px;
+}
+
+/* FONT FAMILY */
+@mixin font-family($family: none) {
+	@if $family == open {
+		font-family: 'Open Sans', sans-serif;
+	} @else {
+		font-family: 'Russo One', sans-serif;
+	}
+}
+
+/* LINK STATES */
+@mixin link-state($static, $hover, $underline: false, $visited: true) {
+	color: $static;
+
+	/*@if $visited != false {
+		&:visited {
+			color: lighten($static, 40%);
+		}
+	}*/
+	&.hover,
+	&:hover,
+	&:focus {
+		color: $hover;
+		outline: none;
+		@if $underline == true { border-bottom: 1px solid lighten($hover, 30%); }
+	}
+	&:active {
+		opacity: .8;
+	}
+}
+
+/* POSITION */ // @include position(na,10px,10px,na);
+@mixin position($args: (na,na,na,na), $property: absolute) {
+
+    @if $property != false {
+        position: $property;
+    }
+
+    $positions: (top, right, bottom, left);
+
+    @for $i from 1 to 5 {
+        @if nth($args,$i) !=  na {
+            #{nth($positions,$i)} : nth($args,$i);
+        }
+    }
+}

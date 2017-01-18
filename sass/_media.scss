@@ -1,0 +1,254 @@
+/* Media styles */
+
+@media screen and (max-width:1040px) {
+
+	#header {
+		nav.menu {
+			display: none;
+
+			&.open {
+				display: block;
+				position: absolute;
+				background: #FFF;
+				width: 100%;
+				left: 0;
+				top: $h;
+
+				ul {
+					max-width: none;
+					padding: 0;
+					float: none;
+					margin: 0;
+
+					li {
+						height: 50px;
+						line-height: 50px;
+						width: 100%;
+						border-bottom: 1px solid $light;
+						background: #FFF;
+						color: $maincolor;
+						text-transform: uppercase;
+
+						&:first-child {
+							border-top: 1px solid $light;
+						}
+						&:last-child {
+							border-bottom: 1px solid $red;
+						}
+
+						a {
+							height: 50px;
+							line-height: 50px;
+							color: $maincolor;
+							text-align: center;
+
+							&:focus,
+							&:hover,
+							&.active  {
+								background: lighten($red,40%);
+							}
+
+							&.login {
+								width: 100%;
+								padding: 0;
+
+								&:before,
+								span.desktop { display: none; }
+								span.mobile { display: block; }
+							}
+						}
+					}
+				}
+			}
+		}
+		.menu-icon {display: block;}
+	}
+
+}
+
+@media screen and (max-width:880px) {
+
+	#content .cars .item { width: 33%; }
+	#content .leftCol  { width: 40%; }
+	#content .rightCol  { width: 60%; }
+	#content .rightCol .cars .item { width: 50%; }
+}
+
+@media screen and (max-width:768px) {
+
+	#header_protector { height: 50px; }
+	#header {
+		height: 50px;
+		@include box-shadow(1px,0,0 1px,$light, inset);
+		nav.menu.open { top: 50px; }
+
+		.inner { padding: 0 20px; }
+		
+		.logo {
+			margin-top: 11px;
+			height: 30px;
+			width: 100px;
+		}
+
+		.toright { margin-top: 0; }
+	}
+
+	#content {
+		.caption {
+			@include font-size(14, 20);
+		}
+
+		.cars {
+			margin: 20px 0;
+			.item { font-size: 14px; }
+		}
+
+		.fotorama .fotorama__nav-wrap .fotorama__nav--dots { bottom: 5px; }
+
+		.button, .input, .textblock p, .textblock ul li { font-size: 14px; }
+		.map { margin-bottom: -30px; }
+	}
+
+	#content .leftCol  { width: 36%; }
+	#content .rightCol  { width: 64%; }
+
+	.popup {
+		width: 100%;
+		min-height: 100%;
+		height: 100%;
+		overflow: scroll;
+		top: 0;
+		left: 0;
+		margin: 0 !important;
+		@include box-sizing();
+	}
+
+	#footer_protector {
+		height: 110px;
+	}
+
+	#footer {
+		height: 80px;
+
+		.inner { padding: 15px 20px 0; }
+		.copy { line-height: 40px; }
+
+		nav.menu {
+			height: 20px;
+
+			ul li {
+				font-size: 14px;
+				height: 20px;
+				line-height: 20px;
+
+				a {
+					height: 20px;
+					line-height: 20px;
+				}
+			}
+		}
+	}
+
+
+	//	Шрифт
+	$object-font-size: 14;
+	$object-line-height: 20;
+
+	* {
+		-webkit-transition: none !important;
+		-moz-transition: none !important;
+		-o-transition: none !important;
+		transition: none !important;
+	}
+
+	.input {
+		-webkit-box-shadow: none;
+		        box-shadow: none;
+		border: 1px solid #ccc;
+
+		&:hover {
+		-webkit-box-shadow: none;
+		        box-shadow: none;
+		}
+
+		&:focus {
+			border: 1px solid #999;
+		}
+	}
+
+}
+
+@media screen and (max-width:650px) {
+
+	#content .cars .item { width: 50%; }
+	#content .leftCol  { width: 100%; .filter { margin-right: 0; padding-bottom: 20px;} }
+	#content .rightCol  { width: 100%; }
+	#content .map { height: auto; .info { position: static; padding: 20px; width: auto; }}
+
+}
+
+@media screen and (max-width:480px) {
+	#header .toright .phone { display: none; }
+	#content .cars .item { width: 100%; .container {margin: 0; }}
+	#content .rightCol .cars .item { width: 100%; }
+}
+
+@media print {
+	*{
+		text-shadow:none !important;
+		color:#000 !important;
+		background:transparent !important;
+		box-shadow:none !important;
+	}
+	#header_print {
+		display: block !important;
+	}
+
+	a,a:visited{
+		text-decoration:underline
+	}
+
+	a[href]:after{
+		content:" (" attr(href) ")"
+	}
+
+	abbr[title]:after{
+		content:" (" attr(title) ")"
+	}
+
+	pre,blockquote{
+		page-break-inside:avoid
+	}
+
+	thead{
+		display:table-header-group
+	}
+
+	tr,img{
+		page-break-inside:avoid
+	}
+
+	img {
+		max-width:100% !important
+	}
+
+	@page {
+		margin:0.5cm
+	}
+
+	p,h2,h3 {
+		orphans:3;
+		widows:3
+	}
+
+	h2,h3 {
+		page-break-after:avoid
+	}
+
+	#header, #footer, #footer_protector, .views, a.description, a.prev, a.next {
+		display: none !important;
+	}
+	p {
+		width: 100% !important;
+	}
+}
